@@ -15,7 +15,7 @@ with file_path.open(mode="r", encoding="UTF-8", newline="") as file:
         empty_list_2 = copy.deepcopy(empty_list_1)
         empty_list_2.sort()
         if empty_list_1 == empty_list_2:
-            print("correct")
+            print("")
         else:
             option=3
             option_1=1
