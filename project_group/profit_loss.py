@@ -4,7 +4,7 @@ from collections import defaultdict
 
 print(Path.cwd())
 
-file_path = Path.cwd()/"csv_report"/"profit & loss.csv"
+file_path = Path.cwd()/'project_group'/"csv_reports"/"profit-and-loss-usd .csv"
 print(file_path.exists())
 print(file_path)
 

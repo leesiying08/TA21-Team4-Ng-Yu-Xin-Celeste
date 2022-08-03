@@ -13,8 +13,3 @@ for row in inputfile:
     rows=row[1]
     #execute print
     print(rows)
-        
-            
-                
-
-        
