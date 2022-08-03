@@ -70,7 +70,7 @@ def coh_function():
                     else:
                         return
                 else:
-                    file.write('[NET PROFIT SURPLUS] NET PROFIT ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY \n')
+                    file.write('[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY \n')
                     break
             break
 print(coh_function())
