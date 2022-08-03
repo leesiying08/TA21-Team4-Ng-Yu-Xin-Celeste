@@ -1,22 +1,13 @@
+# import Path method from pathlib
 from pathlib import Path
-import re, csv
-from collections import defaultdict
-
-print(Path.cwd())
-
-file_path = Path.cwd()/'project_group'/"csv_reports"/"profit-and-loss-usd .csv"
-print(file_path.exists())
-print(file_path)
-
-columns = defaultdict(list)
-
-# Open the profit & loss csv file to read it
-with file_path.open(mode="r", encoding = "UTF-8", newline="") as file:
-  reader = csv.reader(file)
-  next(file)
-
-  for row in reader:
-     for (i,v) in enumerate(row):
-            net_profit = columns[i].append(v)
-print(columns[4])
-
+#import csv function
+import csv
+file=Path.cwd()/'csv_report'/'profit & loss.csv'
+#read and open csv file 
+inputfile=csv.reader(open(file,'r'))
+# use for loop to iterate over a range object.
+for row in inputfile:
+    #access index position 4
+    rows=row[4]
+    #execute print
+    print(rows)
