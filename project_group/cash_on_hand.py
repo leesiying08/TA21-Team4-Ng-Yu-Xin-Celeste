@@ -49,10 +49,6 @@ with file_p.open('r', encoding = 'UTF-8', newline = '') as file1:
 
      
         
-    #if item>0:
-        #print("[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY")
-    #else:
-        #print(f"[CASH DEFICIT] DAY: {orders2.index(item)} , AMOUNT: {item}")
         
 
 
