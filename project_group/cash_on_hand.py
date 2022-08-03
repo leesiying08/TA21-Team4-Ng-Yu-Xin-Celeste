@@ -53,24 +53,28 @@ def coh_function():
     file_path_1.touch()
     #open "summary_report.txt" file in write mode 
     with file_path_1.open(mode="w") as file:
-        #to store all the overhead expenses and overhead categories in a nested list 
         #number of variables in list
         count=len(empty_list1)
         #using for loop in enumerate empty list, starting from index 0
         for count, cash_on_hand in enumerate(empty_list, start=0):
             #find difference between each index within range
             cash_on_hand=[int(empty_list[data+1])-int(empty_list[data]) for data in range(len(empty_list1)-1)]
+            print(cash_on_hand)
             #using for loop find x in cash_on_hand
             for x in cash_on_hand:
+                
                 #create scenario for when x negative
-                if x<0:
+                if (x in cash_on_hand)>0:
                     #execute print when x is negative
-                    file.write(f"[CASH DEFICIT] DAY: {empty_list1[cash_on_hand.index(x)]} , AMOUNT: SGD{round(abs(x*float(forex)),2)} \n")
-            #to break loop
+                    if x<0:
+                        file.write(f"[CASH DEFICIT] DAY: {empty_list1[cash_on_hand.index(x)]} , AMOUNT: SGD{round(abs(x*float(forex)),2)} \n")
+                    else:
+                        return
+                else:
+                    file.write('[NET PROFIT SURPLUS] NET PROFIT ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY \n')
+                    break
             break
 print(coh_function())
-
-     
         
         
 
