@@ -6,6 +6,10 @@ file=Path.cwd()/'csv_report'/'profit & loss.csv'
 emptylist=[]
 emptylist1=[]
 #read and open csv file 
+file_path_1= Path.cwd()/"summary_report2.txt"
+    #create the file "summary_report.txt" in current working directory
+file_path_1.touch()
+print(file_path_1.exists())
 with file.open('r', encoding = 'UTF-8', newline = '') as file1:
     # instantiate a reader object
     list= csv.reader(file1)
@@ -28,5 +32,8 @@ with file.open('r', encoding = 'UTF-8', newline = '') as file1:
             if x<0:
                 #execute print when x is negative
                 print(f"[PROFIT DEFICIT] DAY: {emptylist[profit_and_loss.index(x)]} , AMOUNT: SGD{abs(x)}")
+            elif x>1:
+                print(f"[NET PROFIT SURPLUS]:NET PROFIT EACH DAY IS HIGHER THAN THE PERVIOUS DAY")
         #to break loop
         break
+   
