@@ -23,17 +23,19 @@ with file.open('r', encoding = 'UTF-8', newline = '') as file1:
     #number of variables in list
     count=len(emptylist)
     #using for loop in enumerate empty list, starting from index 0
-    for count, profit_and_loss in enumerate(emptylist1, start=0):
+    with file_path_1.open(mode="w") as file:
+        for count, profit_and_loss in enumerate(emptylist1, start=0):
         #find difference between each index within range
-        profit_and_loss=[int(emptylist1[data+1])-int(emptylist1[data]) for data in range(len(emptylist)-1)]
+            profit_and_loss=[int(emptylist1[data+1])-int(emptylist1[data]) for data in range(len(emptylist)-1)]
         #using for loop find x in cash_on_hand
         for x in profit_and_loss:
             #create scenario for when x negative
             if x<0:
                 #execute print when x is negative
-                print(f"[PROFIT DEFICIT] DAY: {emptylist[profit_and_loss.index(x)]} , AMOUNT: SGD{abs(x)}")
-            elif x>1:
-                print(f"[NET PROFIT SURPLUS]:NET PROFIT EACH DAY IS HIGHER THAN THE PERVIOUS DAY")
+                file.write(f"[PROFIT DEFICIT] DAY: {emptylist[profit_and_loss.index(x)]} , AMOUNT: SGD{abs(x)}")
+            elif x>0:
+                file.write(f"[NET PROFIT SURPLUS]:NET PROFIT EACH DAY IS HIGHER THAN THE PERVIOUS DAY")
         #to break loop
-        break
+            break
+   
    
