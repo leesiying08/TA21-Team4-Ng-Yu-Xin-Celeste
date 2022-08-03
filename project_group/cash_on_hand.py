@@ -59,7 +59,6 @@ def coh_function():
         for count, cash_on_hand in enumerate(empty_list, start=0):
             #find difference between each index within range
             cash_on_hand=[int(empty_list[data+1])-int(empty_list[data]) for data in range(len(empty_list1)-1)]
-            print(cash_on_hand)
             #using for loop find x in cash_on_hand
             for x in cash_on_hand:
                 
