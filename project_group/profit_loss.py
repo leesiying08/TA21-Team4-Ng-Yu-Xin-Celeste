@@ -2,11 +2,11 @@
 from pathlib import Path
 #import csv function
 import csv
-file=Path.cwd()/'csv_report'/'profit & loss.csv'
+file=Path.cwd()/'csv_reports'/'Profits and Loss.csv'
 emptylist=[]
 emptylist1=[]
 #read and open csv file 
-file_path_1= Path.cwd()/"summary_report2.txt"
+file_path_1= Path.cwd()/"summary_report.txt"
     #create the file "summary_report.txt" in current working directory
 file_path_1.touch()
 print(file_path_1.exists())
