@@ -23,7 +23,7 @@ def profitloss_function():
         exchange_rate_list.append(exchange_rate[value]["5. Exchange Rate"])
     #access index position 0
         forex=(exchange_rate_list[0])
-    file=Path.cwd()/'csv_report'/'profit & loss.csv'
+    file=Path.cwd()/'project_group'/'csv_reports'/'profit-and-loss-usd .csv'
     #read and open csv file 
     with file.open('r', encoding = 'UTF-8', newline = '') as file1:
     # instantiate a reader object
@@ -37,7 +37,7 @@ def profitloss_function():
             stats2=stats[4]
             emptylist.append(stats1)
             emptylist1.append(stats2)
-    file_path_1= Path.cwd()/'summary_report2.txt'
+    file_path_1= Path.cwd()/'project_group'/'summary_report2.txt'
     #create the file "summary_report.txt" in current working directory
     file_path_1.touch()
     #open "summary_report.txt" file in write mode     
