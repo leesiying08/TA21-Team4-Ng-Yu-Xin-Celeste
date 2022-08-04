@@ -27,7 +27,7 @@ def api_function():
         #open the "summary_report.txt" file in write mode
         with file_path.open(mode="w") as file:
             #write the f string into the "summary_report.txt" file
-            file.write(f"[REAL TIME CURRENCY CONVERSION RATE] USD1 = SGD{float(statement)}")
-#activate the function
-print(api_function())
+            file.write(f"[REAL TIME CURRENCY CONVERSION RATE] USD1 = SGD{float(statement)} \n")
+#activate function
+api_function()
 
