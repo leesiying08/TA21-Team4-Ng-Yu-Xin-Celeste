@@ -2,6 +2,7 @@
 from pathlib import Path
 #import csv function
 import csv,requests
+#cash on hand function
 def coh_function():
     # instantiate an file path object to current working directory
     """
@@ -22,11 +23,11 @@ def coh_function():
         exchange_rate_list.append(exchange_rate[value]["5. Exchange Rate"])
     #access index position 0
         forex=(exchange_rate_list[0])
-    # extend to file name 'csv_reports'/'Cash on Hand.csv'
-    file_p=Path.cwd()/'csv_reports'/'Cash on Hand.csv'
+    # extend to file name 'project_group'/'csv_reports'/'cash-on-hand-usd.csv'
+    file_p=Path.cwd()/'project_group'/'csv_reports'/'cash-on-hand-usd.csv'
     # 3. Open file using `with` and `open` keyword in 'read' mode.
-    # Include one more parameter, newline="" and with exception handling
-    with file_p.open('r', encoding = 'ascii',errors='ignore',newline = '') as file1:
+    # Include one more parameter, newline="".
+    with file_p.open('r', encoding = 'UTF-8', newline = '') as file1:
         # instantiate a reader object
         list= csv.reader(file1)
         # use `next()` to skip the header.
@@ -48,7 +49,7 @@ def coh_function():
             #append the value to the empty_list1.
             empty_list1.append(lines4)
          #create a path object with file name "summary_report.txt"
-    file_path_1= Path.cwd()/"summary_report.txt"
+    file_path_1= Path.cwd()/'project_group'/"summary_report.txt"
     #create the file "summary_report.txt" in current working directory
     file_path_1.touch()
     #open "summary_report.txt" file in write mode 
@@ -59,27 +60,19 @@ def coh_function():
         for count, cash_on_hand in enumerate(empty_list, start=0):
             #find difference between each index within range
             cash_on_hand=[int(empty_list[data+1])-int(empty_list[data]) for data in range(len(empty_list1)-1)]
-            #using for loop find x in cash_on_hand
-        for x in cash_on_hand:
-                    #execute print when x is negative
-            if x<0:
-                file.write(f"[CASH DEFICIT] DAY: {empty_list1[cash_on_hand.index(x)]} , AMOUNT: SGD{round(abs(x*float(forex)),1)} \n")
-           
-                
-print(coh_function())
-        
-        
-
-
-    
-   
-    
-    
-    
-            
-        
-        
-
-
-
-        
+        #using for loop find n in cash_on_hand
+        for n in cash_on_hand:
+            #check if it meets condition of n is less than or equal to 0
+            if n<=0:
+                #print to see what values are less than 0
+                print(n)
+                #check if it meets condition of all values in list are positive
+                if all(n >=0 for n in cash_on_hand):
+                    #statement to be written in txt if scenario is fulfilled
+                   file.write('[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY \n')
+                #other condition if above is not applicable    
+                elif any(n<=0 for n in cash_on_hand): 
+                    #statement to write on txt if condition is fulfilled
+                    file.write(f"[CASH DEFICIT] DAY: {empty_list1[cash_on_hand.index(n)]} , AMOUNT: SGD{round((abs(n)*float(forex)),2)} \n")
+#execute function                
+print(coh_function())    
