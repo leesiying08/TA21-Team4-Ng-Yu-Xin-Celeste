@@ -21,7 +21,7 @@ def profitloss_function(forex):
     exchange_rate_list.append(exchange_rate['Realtime Currency Exchange Rate']["5. Exchange Rate"])
     #access index position 0
     forex=(exchange_rate_list[0])
-    file=Path.cwd()/'csv_reports'/'profit-and-loss-usd .csv'
+    file=Path.cwd()/'csv_reports'/'Profits and Loss.csv'
     #read and open csv file 
     with file.open('r', encoding = 'UTF-8', newline = '') as file1:
     # instantiate a reader object
