@@ -23,7 +23,7 @@ def coh_function():
     #access index position 0
         forex=(exchange_rate_list[0])
     # extend to file name 'project_group'/'csv_reports'/'cash-on-hand-usd.csv'
-    file_p=Path.cwd()/'csv_reports'/'cash-on-hand-usd.csv'
+    file_p=Path.cwd()/'csv_reports'/'Cash on Hand.csv'
     # 3. Open file using `with` and `open` keyword in 'read' mode.
     # Include one more parameter, newline="".
     with file_p.open('r', encoding = 'UTF-8', newline = '') as file1:
