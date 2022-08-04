@@ -1,7 +1,7 @@
 from pathlib import Path
 import csv, requests
 #create a function
-def overheads_function():
+def overheads_function(forex):
     """
     -This function finds the highest overhead expense and convert the highest overhead expense to SGD
     -This function also finds the category with the highest overhead expense
@@ -15,20 +15,18 @@ def overheads_function():
     #create empty list for appending
     exchange_rate_list = []
     #Use for loop to iterate over a range object.
-    for value in exchange_rate:
     #appending exchange rate into empty list
-        exchange_rate_list.append(exchange_rate[value]["5. Exchange Rate"])
+    exchange_rate_list.append(exchange_rate['Realtime Currency Exchange Rate']["5. Exchange Rate"])
     #access index position 0
-        forex=(exchange_rate_list[0])
-
-    #create path to current working directory and extend to "csv_reports" where all csv reports are and then extend to "Overheads.csv" file where csv files are 
-    file_path=Path.cwd()/"csv_reports"/"Overheads.csv"
+    forex=(exchange_rate_list[0])
+    #create path to current working directory and extend to "csv_reports" where all csv reports are and then extend to "overheads-day-41.csv" file where csv files are 
+    file_path=Path.cwd()/"csv_reports"/"overheads-day-41.csv"
     #create empty_list to store all the overhead expense from each category
     empty_list=[]
     #create empty_list_1 to store all the overhead categories and overhead expenses as a dictionary
     empty_list_1=[]
-    #open "Overheads.csv" file in read mode and with exception handling
-    with file_path.open(mode="r", encoding="ascii",errors='ignore',newline="")as file:
+    #open "overheads-day-41.csv" file in read mode
+    with file_path.open(mode="r", encoding="UTF-8", newline="")as file:
         #instantiate a reader object
         reader=csv.reader(file)
         #skip the header
@@ -41,8 +39,8 @@ def overheads_function():
             empty_dict["category"]=category
             #append the empty_dict to empty_list_1 
             empty_list_1.append(empty_dict)
-    #open the "Overheads.csv" file in read mode and with exception handling
-    with file_path.open(mode="r", encoding="ascii",errors='ignore',newline="")as file:
+    #open the "overheads-day-41.csv" file in read mode
+    with file_path.open(mode="r", encoding="UTF-8", newline="")as file:
         #instantiate a reader object
         reader=csv.reader(file)
         #skip the header
@@ -60,19 +58,20 @@ def overheads_function():
     #create the file "summary_report.txt" in current working directory
     file_path_1.touch()
     #open "summary_report.txt" file in write mode 
-    with file_path_1.open(mode="w") as file:
+    with file_path_1.open(mode="a") as file:
         #to store all the overhead expenses and overhead categories in a nested list 
         overhead_expense=[value.get('category') for value in empty_list_1]
         #for loop to iterate over the overhead_expense
         for amount in overhead_expense:
             #to find which sublist had the value of the highest overhead expenses
             if float(amount[1])== highest_overhead:
+                #convert the highest overhead expense from USD to SGD
+                highest_overhead_1= highest_overhead * float(forex)
+                #round up the highest overhead expense in SGD to 1 decimal place
+                highest_overhead_2=round(highest_overhead_1, 1)
                 #to extract out the sub list that contain the highest overhead expenses
                 statement_1=amount[0:2] 
                 #assign statement_2 as the variable for the overhead category with the highest expense
                 statement_2= statement_1[0]   
-                #write the f string into the summary_report.txt file, convert the highest_overhead from USD to SGD and round up the value in SGD to 1 decimal place 
-                file.write(f"[HIGHEST OVERHEADS] {statement_2}: SGD{round(highest_overhead*float(forex),1)} \n")
-       
-#to activate the function
-print(overheads_function())
+                #write the f string into the summary_report.txt file 
+                file.write(f"[HIGHEST OVERHEADS] {statement_2}: SGD{highest_overhead_2} \n")
