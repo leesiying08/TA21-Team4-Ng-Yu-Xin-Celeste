@@ -26,7 +26,7 @@ def coh_function():
     file_p=Path.cwd()/'csv_reports'/'Cash on Hand.csv'
     # 3. Open file using `with` and `open` keyword in 'read' mode.
     # Include one more parameter, newline="".
-    with file_p.open('r', encoding = 'UTF-8', newline = '') as file1:
+    with file_p.open('r', encoding = 'ascii',errors='ignore',newline = '') as file1:
         # instantiate a reader object
         list= csv.reader(file1)
         # use `next()` to skip the header.
