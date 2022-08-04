@@ -23,7 +23,7 @@ def coh_function():
     #access index position 0
         forex=(exchange_rate_list[0])
     # extend to file name 'project_group'/'csv_reports'/'cash-on-hand-usd.csv'
-    file_p=Path.cwd()/'project_group'/'csv_reports'/'cash-on-hand-usd.csv'
+    file_p=Path.cwd()/'csv_reports'/'cash-on-hand-usd.csv'
     # 3. Open file using `with` and `open` keyword in 'read' mode.
     # Include one more parameter, newline="".
     with file_p.open('r', encoding = 'UTF-8', newline = '') as file1:
@@ -60,19 +60,12 @@ def coh_function():
             #find difference between each index within range
             cash_on_hand=[int(empty_list[data+1])-int(empty_list[data]) for data in range(len(empty_list1)-1)]
             #using for loop find x in cash_on_hand
-            for x in cash_on_hand:
-                
-                #create scenario for when x negative
-                if (x in cash_on_hand)>0:
+        for x in cash_on_hand:
                     #execute print when x is negative
-                    if x<0:
-                        file.write(f"[CASH DEFICIT] DAY: {empty_list1[cash_on_hand.index(x)]} , AMOUNT: SGD{round(abs(x*float(forex)),2)} \n")
-                    else:
-                        return
-                else:
-                    file.write('[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY \n')
-                    break
-            break
+            if x<0:
+                file.write(f"[CASH DEFICIT] DAY: {empty_list1[cash_on_hand.index(x)]} , AMOUNT: SGD{round(abs(x*float(forex)),2)} \n")
+           
+                
 print(coh_function())
         
         
