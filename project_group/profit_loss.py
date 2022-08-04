@@ -2,6 +2,7 @@
 from pathlib import Path
 #import csv function
 import csv,requests
+#create function for profit_loss
 def profitloss_function():
     # instantiate an file path object to current working directory
     """
@@ -22,51 +23,42 @@ def profitloss_function():
         exchange_rate_list.append(exchange_rate[value]["5. Exchange Rate"])
     #access index position 0
         forex=(exchange_rate_list[0])
-        forex_1=float(forex)
-    # extend to file name 'csv_reports'/'Cash on Hand.csv'
-    file_p=Path.cwd()/'csv_reports'/'Profit and Loss.csv'
-    # 3. Open file using `with` and `open` keyword in 'read' mode.
-    # Include one more parameter, newline="" and with exception handling
-    with file_p.open('r', encoding = 'ascii',errors='ignore',newline = '') as file1:
-        # instantiate a reader object
+    file=Path.cwd()/'csv_report'/'profit & loss.csv'
+    #read and open csv file 
+    with file.open('r', encoding = 'UTF-8', newline = '') as file1:
+    # instantiate a reader object
         list= csv.reader(file1)
         # use `next()` to skip the header.
         next(list)
-        #empty list for appending
-        empty_list=[]
-        #empty list for appending
-        empty_list1=[]
-        #using for loop find line in list
-        for line in list:
-            #access index 0
-            lines=line[0]
-            #converting string into integer
-            lines4=int(lines)
-            #access index 4
-            lines2=line[4]
-            #append the value to the empty_list.
-            empty_list.append(lines2)
-            #append the value to the empty_list1.
-            empty_list1.append(lines4)
-         #create a path object with file name "summary_report.txt"
-    file_path_1= Path.cwd()/"summary_report.txt"
+        emptylist=[]
+        emptylist1=[]
+        for stats in list:
+            stats1=stats[0]
+            stats2=stats[4]
+            emptylist.append(stats1)
+            emptylist1.append(stats2)
+    file_path_1= Path.cwd()/'summary_report2.txt'
     #create the file "summary_report.txt" in current working directory
     file_path_1.touch()
-    #open "summary_report.txt" file in write mode 
+    #open "summary_report.txt" file in write mode     
     with file_path_1.open(mode="w") as file:
         #number of variables in list
-        count=len(empty_list1)
+        count=len(emptylist)
         #using for loop in enumerate empty list, starting from index 0
-        for count, profit_loss in enumerate(empty_list, start=0):
+        for count, cash_on_hand in enumerate(emptylist1, start=0):
             #find difference between each index within range
-            profit_loss=[int(empty_list[data+1])-int(empty_list[data]) for data in range(len(empty_list1)-1)]
-            #using for loop find x in cash_on_hand
-        for x in profit_loss:
-                    #execute print when x is negative
-            if x<0:
-                file.write(f"[PROFIT DEFICIT] DAY: {empty_list1[profit_loss.index(x)]} , AMOUNT: SGD{round(abs(x*float(forex_1)),1)} \n")
-           
-                
+            profit_and_loss=[int(emptylist1[data+1])-int(emptylist1[data]) for data in range(len(emptylist)-1)]
+             #using for loop find x in cash_on_hand
+        for n in profit_and_loss:
+            #check if it meets condition of n is less than or equal to 0
+            if n<=0:
+                #check if it meets condition of all values in list are positive
+                if all(n >=0 for n in profit_and_loss):
+                   #statement to be written in txt if scenario is fulfilled
+                   file.write('[NET PROFIT SURPLUS] NET PROFIT ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY \n')
+                 #other condition if above is not applicable      
+                elif any(n<=0 for n in profit_and_loss): 
+                    #statement to write on txt if condition is fulfilled
+                    file.write(f"[PROFIT DEFICIT] DAY: {emptylist[profit_and_loss.index(n)]} , AMOUNT: SGD{round((abs(n)*float(forex)),2)} \n")
+#execute function                
 print(profitloss_function())
-   
-   
