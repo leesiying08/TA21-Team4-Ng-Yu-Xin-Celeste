@@ -27,7 +27,7 @@ def overheads_function():
     empty_list=[]
     #create empty_list_1 to store all the overhead categories and overhead expenses as a dictionary
     empty_list_1=[]
-    #open "overheads-day-41.csv" file in read mode
+    #open "Overheads.csv" file in read mode
     with file_path.open(mode="r", encoding="ascii",errors='ignore',newline="")as file:
         #instantiate a reader object
         reader=csv.reader(file)
