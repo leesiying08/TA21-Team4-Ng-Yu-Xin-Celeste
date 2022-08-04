@@ -6,7 +6,7 @@ import csv,requests,api
 def profitloss_function(forex):
     # instantiate an file path object to current working directory
     """
-    -This function finds whether there is a surplus or deficit of cash on hand and convert the cash on hand to SGD
+    -This function finds whether there is a surplus or deficit of profits and convert the profits' surplus or deficit to SGD
     -This function also finds the day where the deficit happened.
     """
     url = "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=SGD&apikey=RV2RECVPN6VF1SHS"
@@ -28,13 +28,21 @@ def profitloss_function(forex):
         list= csv.reader(file1)
         # use `next()` to skip the header.
         next(list)
+        # empty list for appending
         emptylist=[]
+        # empty list for appending
         emptylist1=[]
+        # using for loop to find stats in list
         for stats in list:
+            # access index 0
             stats1=stats[0]
+            #access index 4
             stats2=stats[4]
+            #append value to emptylist
             emptylist.append(stats1)
+            #append value to emptylist1
             emptylist1.append(stats2)
+    # create path object with file name 'summary_report.txt'
     file_path_1= Path.cwd()/'summary_report.txt'
     #create the file "summary_report.txt" in current working directory
     file_path_1.touch()
@@ -46,7 +54,7 @@ def profitloss_function(forex):
         for count, profit_and_loss in enumerate(emptylist1, start=0):
             #find difference between each index within range
             profit_and_loss=[int(emptylist1[data+1])-int(emptylist1[data]) for data in range(len(emptylist)-1)]
-             #using for loop find x in cash_on_hand
+             #using for loop find x in profit_and_loss
         for n in profit_and_loss:
             #check if it meets condition of n is less than or equal to 0
             if n<=0:
