@@ -1,9 +1,9 @@
 # import Path method from pathlib
 from pathlib import Path
 #import csv function
-import csv,requests
+import csv,requests,api
 #create function for profit_loss
-def profitloss_function():
+def profitloss_function(forex):
     # instantiate an file path object to current working directory
     """
     -This function finds whether there is a surplus or deficit of cash on hand and convert the cash on hand to SGD
@@ -17,13 +17,11 @@ def profitloss_function():
     exchange_rate = data
     #create empty list for appending
     exchange_rate_list = []
-    #Use for loop to iterate over a range object.
-    for value in exchange_rate:
     #appending exchange rate into empty list
-        exchange_rate_list.append(exchange_rate[value]["5. Exchange Rate"])
+    exchange_rate_list.append(exchange_rate['Realtime Currency Exchange Rate']["5. Exchange Rate"])
     #access index position 0
-        forex=(exchange_rate_list[0])
-    file=Path.cwd()/'project_group'/'csv_reports'/'profit-and-loss-usd .csv'
+    forex=(exchange_rate_list[0])
+    file=Path.cwd()/'csv_reports'/'profit-and-loss-usd .csv'
     #read and open csv file 
     with file.open('r', encoding = 'UTF-8', newline = '') as file1:
     # instantiate a reader object
@@ -37,15 +35,15 @@ def profitloss_function():
             stats2=stats[4]
             emptylist.append(stats1)
             emptylist1.append(stats2)
-    file_path_1= Path.cwd()/'project_group'/'summary_report2.txt'
+    file_path_1= Path.cwd()/'summary_report.txt'
     #create the file "summary_report.txt" in current working directory
     file_path_1.touch()
     #open "summary_report.txt" file in write mode     
-    with file_path_1.open(mode="w") as file:
+    with file_path_1.open(mode="a") as file:
         #number of variables in list
         count=len(emptylist)
         #using for loop in enumerate empty list, starting from index 0
-        for count, cash_on_hand in enumerate(emptylist1, start=0):
+        for count, profit_and_loss in enumerate(emptylist1, start=0):
             #find difference between each index within range
             profit_and_loss=[int(emptylist1[data+1])-int(emptylist1[data]) for data in range(len(emptylist)-1)]
              #using for loop find x in cash_on_hand
@@ -60,5 +58,3 @@ def profitloss_function():
                 elif any(n<=0 for n in profit_and_loss): 
                     #statement to write on txt if condition is fulfilled
                     file.write(f"[PROFIT DEFICIT] DAY: {emptylist[profit_and_loss.index(n)]} , AMOUNT: SGD{round((abs(n)*float(forex)),2)} \n")
-#execute function                
-print(profitloss_function())
