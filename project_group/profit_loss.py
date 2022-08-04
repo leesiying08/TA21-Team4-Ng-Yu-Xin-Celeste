@@ -26,7 +26,7 @@ def profitloss_function():
     # extend to file name 'csv_reports'/'Cash on Hand.csv'
     file_p=Path.cwd()/'csv_reports'/'Profit and Loss.csv'
     # 3. Open file using `with` and `open` keyword in 'read' mode.
-    # Include one more parameter, newline="".
+    # Include one more parameter, newline="" and with exception handling
     with file_p.open('r', encoding = 'ascii',errors='ignore',newline = '') as file1:
         # instantiate a reader object
         list= csv.reader(file1)
