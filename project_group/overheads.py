@@ -67,16 +67,12 @@ def overheads_function():
         for amount in overhead_expense:
             #to find which sublist had the value of the highest overhead expenses
             if float(amount[1])== highest_overhead:
-                #convert the highest overhead expense from USD to SGD
-                highest_overhead_1= highest_overhead * float(forex)
-                #round up the highest overhead expense in SGD to 1 decimal place
-                highest_overhead_2=round(highest_overhead_1, 1)
                 #to extract out the sub list that contain the highest overhead expenses
                 statement_1=amount[0:2] 
                 #assign statement_2 as the variable for the overhead category with the highest expense
                 statement_2= statement_1[0]   
-                #write the f string into the summary_report.txt file 
-                file.write(f"[HIGHEST OVERHEADS] {statement_2}: SGD{highest_overhead_2} \n")
+                #write the f string into the summary_report.txt file, convert the highest_overhead from USD to SGD and round up the value in SGD to 1 decimal place 
+                file.write(f"[HIGHEST OVERHEADS] {statement_2}: SGD{round(highest_overhead*float(forex),1)} \n")
        
 #to activate the function
 print(overheads_function())
