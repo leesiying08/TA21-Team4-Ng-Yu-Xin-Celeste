@@ -3,7 +3,9 @@ from pathlib import Path
 #import csv function
 import csv,requests
 #cash on hand function
-def coh_function():
+# instantiate an file path object to current working directory
+  
+def coh_function(forex):
     # instantiate an file path object to current working directory
     """
     -This function finds whether there is a surplus or deficit of cash on hand and convert the cash on hand to SGD
@@ -18,13 +20,12 @@ def coh_function():
     #create empty list for appending
     exchange_rate_list = []
     #Use for loop to iterate over a range object.
-    for value in exchange_rate:
     #appending exchange rate into empty list
-        exchange_rate_list.append(exchange_rate[value]["5. Exchange Rate"])
+    exchange_rate_list.append(exchange_rate['Realtime Currency Exchange Rate']["5. Exchange Rate"])
     #access index position 0
-        forex=(exchange_rate_list[0])
+    forex=(exchange_rate_list[0])
     # extend to file name 'project_group'/'csv_reports'/'cash-on-hand-usd.csv'
-    file_p=Path.cwd()/'project_group'/'csv_reports'/'cash-on-hand-usd.csv'
+    file_p=Path.cwd()/'csv_reports'/'cash-on-hand-usd.csv'
     # 3. Open file using `with` and `open` keyword in 'read' mode.
     # Include one more parameter, newline="".
     with file_p.open('r', encoding = 'UTF-8', newline = '') as file1:
@@ -49,11 +50,11 @@ def coh_function():
             #append the value to the empty_list1.
             empty_list1.append(lines4)
          #create a path object with file name "summary_report.txt"
-    file_path_1= Path.cwd()/'project_group'/"summary_report.txt"
+    file_path_1= Path.cwd()/"summary_report.txt"
     #create the file "summary_report.txt" in current working directory
     file_path_1.touch()
     #open "summary_report.txt" file in write mode 
-    with file_path_1.open(mode="w") as file:
+    with file_path_1.open(mode="a") as file:
         #number of variables in list
         count=len(empty_list1)
         #using for loop in enumerate empty list, starting from index 0
@@ -64,8 +65,6 @@ def coh_function():
         for n in cash_on_hand:
             #check if it meets condition of n is less than or equal to 0
             if n<=0:
-                #print to see what values are less than 0
-                print(n)
                 #check if it meets condition of all values in list are positive
                 if all(n >=0 for n in cash_on_hand):
                     #statement to be written in txt if scenario is fulfilled
@@ -74,5 +73,3 @@ def coh_function():
                 elif any(n<=0 for n in cash_on_hand): 
                     #statement to write on txt if condition is fulfilled
                     file.write(f"[CASH DEFICIT] DAY: {empty_list1[cash_on_hand.index(n)]} , AMOUNT: SGD{round((abs(n)*float(forex)),2)} \n")
-#execute function                
-print(coh_function())    
