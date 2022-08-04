@@ -63,7 +63,7 @@ def coh_function():
         for x in cash_on_hand:
                     #execute print when x is negative
             if x<0:
-                file.write(f"[CASH DEFICIT] DAY: {empty_list1[cash_on_hand.index(x)]} , AMOUNT: SGD{round(abs(x*float(forex)),2)} \n")
+                file.write(f"[CASH DEFICIT] DAY: {empty_list1[cash_on_hand.index(x)]} , AMOUNT: SGD{round(abs(x*float(forex)),1)} \n")
            
                 
 print(coh_function())
