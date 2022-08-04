@@ -21,8 +21,8 @@ def overheads_function():
     #access index position 0
         forex=(exchange_rate_list[0])
 
-    #create path to current working directory and extend to "csv_reports" where all csv reports are and then extend to "overheads-day-41.csv" file where csv files are 
-    file_path=Path.cwd()/"csv_reports"/"overheads-day-41.csv"
+    #create path to current working directory and extend to "csv_reports" where all csv reports are and then extend to "Overheads.csv" file where csv files are 
+    file_path=Path.cwd()/"csv_reports"/"Overheads.csv"
     #create empty_list to store all the overhead expense from each category
     empty_list=[]
     #create empty_list_1 to store all the overhead categories and overhead expenses as a dictionary
@@ -41,7 +41,7 @@ def overheads_function():
             empty_dict["category"]=category
             #append the empty_dict to empty_list_1 
             empty_list_1.append(empty_dict)
-    #open the "overheads-day-41.csv" file in read mode
+    #open the "Overheads.csv" file in read mode
     with file_path.open(mode="r", encoding="UTF-8", newline="")as file:
         #instantiate a reader object
         reader=csv.reader(file)
